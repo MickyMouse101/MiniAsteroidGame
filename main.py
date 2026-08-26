@@ -3,16 +3,22 @@ import constants
 import circleshape
 from logger import log_state
 from player import Player
-
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 
 
 def main():
+    asteroids = pygame.sprite.Group()
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     pygame.init()
     Player.containers = (updatable, drawable)
     player = Player(constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable,)
+    asteroidfield = AsteroidField()
+    
     screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
     
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
