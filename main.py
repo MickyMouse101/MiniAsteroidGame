@@ -5,8 +5,13 @@ from logger import log_state
 from player import Player
 
 
+
+
 def main():
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
     pygame.init()
+    Player.containers = (updatable, drawable)
     player = Player(constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2)
     screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
     
@@ -25,8 +30,9 @@ def main():
                 return
 
         screen.fill("black")
-        player.update(dt)
-        player.draw(screen)
+        updatable.update(dt)
+        for thing in drawable:
+            thing.draw(screen)
         pygame.display.flip()
 
         dt = clock.tick(60) / 1000
